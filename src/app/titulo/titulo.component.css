@@ -1,0 +1,14 @@
+h3 {
+  color: #828282;
+  font-size: 16px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.line {
+  position: relative;
+  margin-bottom: 10px;  
+  height: 4px;
+  border-radius: 2px;
+  width: 100%;
+  background-color: #15989c;
+}

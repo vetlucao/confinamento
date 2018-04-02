@@ -1,0 +1,187 @@
+<mat-accordion id="cadastro" multi="false">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <app-titulo titulo="Upload - Cadastro Coletivo"></app-titulo>
+        <!-- Upload - Cadastro Coletivo -->
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <a target="_self" href="http://localhost:8080/template/template.csv" download="template.csv">
+      <button matTooltip="Clique para baixar o modelo de cadastro" matTooltipPosition="below" mat-raised-button color="primary">
+        <mat-icon aria-label="Example icon-button with a heart icon">file_download</mat-icon>Baixar modelo</button>
+    </a>
+
+    <button [ngxFilePicker]="3" (filePick)="uploadFile($event)" matTooltip="Após preencher o template importe o mesmo clicando neste botão"
+      matTooltipPosition="below" mat-raised-button color="primary">
+      <mat-icon aria-label="Example icon-button with a heart icon">file_upload</mat-icon>Realizar upload</button>
+    <br>
+    <br>
+    <div *ngIf="showUploadProgress" class="padding">
+      <h3>Aguarde... Registrando animais</h3>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <app-erro-template *ngFor="let erro of erros" [mensagem]="erro.$mensagem" [observacoes]="erro.$observacoes"></app-erro-template>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel #expPanel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <app-titulo titulo="Preenchimento - Cadastro Individual"></app-titulo>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-slide-toggle class="toggle" [(ngModel)]="pesagemObrigatoria" color="primary">Pesagem obrigatória</mat-slide-toggle>
+    <br>
+    <mat-slide-toggle class="toggle" [(ngModel)]="sisbovObrigatoria" color="primary">Sisbov obrigatório</mat-slide-toggle>
+
+    <form #form="ngForm" (ngSubmit)="submit(form)" class="example-form">
+      <mat-form-field class="example-full-width">
+        <input [(ngModel)]="form.nome" name="nome" type="text" matInput placeholder="Nome">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input (focusout)="verificarTag(form)" #tag type="number" [(ngModel)]="form.tag" name="tag" onKeyPress="if(this.value.length==15) return false;"
+          required matInput placeholder="TAG">
+        <mat-error>
+          TAG
+          <strong> é obrigatória</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input type="text" [(ngModel)]="form.manejo" #manejo name="manejo" required matInput placeholder="Manejo">
+        <mat-error>
+          Manejo
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input #sisbov [required]="sisbovObrigatoria" (focusout)="verificarSisbov(form)" type="number" [(ngModel)]="form.sisbov"
+          name="sisbov" onKeyPress="if(this.value.length==15) return false;" matInput placeholder="Sisbov">
+        <mat-error>
+          Sisbov
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select (change)="selecionarEspecie(form)" [(ngModel)]="form.especie" name="especie" required placeholder="Espécie">
+          <mat-option *ngFor="let especie of especies" [value]="especie.$id">{{especie.$nome}}</mat-option>
+        </mat-select>
+        <mat-error>
+          Espécie
+          <strong> é obrigatória</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select (change)="selecionarCurral(form)" [(ngModel)]="form.curral" name="curral" placeholder="Curral">
+          <mat-option *ngFor="let curral of currais"  [value]="curral.$id">
+            {{curral.$nome}}
+          </mat-option>         
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select (change)="selecionarLote(form)" [(ngModel)]="form.lote" name="lote" placeholder="Lote">
+          <mat-option *ngFor="let lote of lotes" [value]="lote.$id">
+            {{lote.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select required [(ngModel)]="form.sexo" name="sexo" placeholder="Sexo">
+          <mat-option value="M">
+            Macho
+          </mat-option>
+          <mat-option value="F">
+            Fêmea
+          </mat-option>
+          <mat-option value="C">
+            Castrado
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Sexo
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" touchUi="true" #picker></mat-datepicker>
+        <input matInput [max]="maxDate" [(ngModel)]="form.dataNascimento" name="dataNascimento" [matDatepicker]="picker" placeholder="Data de nascimento">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input #pesoInicial min="0" step="1" [required]="pesagemObrigatoria" [(ngModel)]="form.pesoInicial" name="pesoInicial" type="number"
+          matInput placeholder="Peso inicial (kg)">
+        <mat-error>
+          Peso
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="form.categoria" name="categoria" placeholder="Categoria">
+          <mat-option *ngFor="let categoria of categorias" [value]="categoria.$id">
+            {{categoria.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input [(ngModel)]="form.gta" name="gta" matInput placeholder="GTA">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [max]="maxDate" [(ngModel)]="form.inicioAtividade" name="inicioAtividade" required [matDatepicker]="picker2"
+          placeholder="Início de atividade">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" touchUi="true" #picker2></mat-datepicker>
+        <mat-error>
+          Início de atividade
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-select required (change)="selecionarRacas(form.racas)" placeholder="Raças" [(ngModel)]="form.racas" name="racas" multiple>
+          <mat-option *ngFor="let raca of racas" value="{{raca.id}}">{{raca.nome}}</mat-option>
+        </mat-select>
+        <mat-error>
+          Raça
+          <strong> é obrigatória</strong>
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <div *ngIf="racasSelecionadas.length > 0" class="titulo-composicao-raca">
+        <span class="titulo-raca">Composição de Raça</span>
+      </div>
+
+      <app-raca-composicao *ngFor="let raca of racasSelecionadas" [raca]="raca"></app-raca-composicao>
+      <br>
+      <button type="submit" matTooltip="Clique para registrar o animal" matTooltipPosition="below" mat-raised-button color="primary">
+        <mat-icon>save</mat-icon> Registrar animal</button>
+
+    </form>
+    <!--   <br>
+            <button (click)="openDialog()" matTooltipPosition="below" mat-raised-button color="primary">
+              <mat-icon>save</mat-icon> Dialog</button> -->
+
+    <br>
+    <app-erro-template *ngFor="let erro of erros" [mensagem]="erro.$mensagem" [observacoes]="erro.$observacoes"></app-erro-template>
+    <div *ngIf="showProgress">
+      <h3>Aguarde... Registrando animal</h3>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

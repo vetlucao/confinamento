@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.padding {
+  padding: 10px;
+}
+
+.master {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #3fb5b5;
+  height: 3px;
+}
+
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary,
+.mat-raised-button.mat-primary {
+  background-color: #0b7c7c;
+}
+
+.mat-fab.mat-accent,
+.mat-mini-fab.mat-accent,
+.mat-raised-button.mat-accent {
+  background-color: #9c9c9c;
+}
+
+.mat-toolbar.mat-primary {
+  background: #105982;
+  min-height: 45px !important;
+}
+
+.mat-progress-bar-fill::after {
+  background: #105982;
+}
+
+.w3-code {
+  border-left: 4px solid #0b7c7c !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: #0b7c7c;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+  color: black;
+}
+
+.mat-simple-snackbar-action {
+  color: #42f9e0;
+}
+
+.mat-calendar-body-selected{
+  background-color: #0b7c7c;
+  color: #fff;
+}
+
+.mat-form-field-prefix .mat-datepicker-toggle-default-icon, .mat-form-field-suffix .mat-datepicker-toggle-default-icon{
+  width: 35px !important;
+  padding-right: 150px !important;
+  color: #0b7c7c;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb{
+  background-color : #0b7c7c;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color : rgb(11, 124, 124, 0.7);
+}

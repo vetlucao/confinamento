@@ -1,0 +1,60 @@
+<div class="padding">
+  <mat-card>
+    <form #form="ngForm" (ngSubmit)="submit(form)" class="example-form">
+      <mat-form-field class="example-full-width">
+        <input required matInput placeholder="Nome" [ngModel]="form.nome" name="nome">
+        <mat-error>
+          Nome
+          <strong> é obrigatório</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="form.curral" name="curral" required placeholder="Selecione um curral">
+          <mat-option *ngFor="let curral of currais" [value]="curral.$id">
+            {{ curral.$nome }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br>
+      <br>
+      <button type="submit" mat-raised-button color="primary">Registrar Lote</button>
+
+    </form>
+  </mat-card>
+  <br>
+
+  <div *ngIf="buscarLoteEnabled" >
+    <mat-accordion id="lote" multi="false">
+      <mat-expansion-panel expanded="false" *ngFor="let lote of lotes">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{lote.$nome}}
+          </mat-panel-title>
+          <mat-panel-description>
+  
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <mat-form-field>
+          <input matInput placeholder="Nome do Lote" [(ngModel)]="lote.$nome">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select [(ngModel)]="lote.$idCurral" placeholder="Selecione um curral">
+              <mat-option *ngFor="let curral of currais" [value]="curral.$id">
+                {{ curral.$nome }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <br>
+        <button mat-raised-button (click)="atualizarLote(lote)" color="primary">Atualizar Lote</button>
+        <button mat-raised-button (click)="removerLote(lote)" color="primary">Remover lote</button>
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</div>

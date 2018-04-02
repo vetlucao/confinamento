@@ -1,0 +1,29 @@
+.mat-primary .mat-pseudo-checkbox-checked{
+    background: red !important;
+}
+
+.titulo-composicao-raca{
+    margin-bottom: 10px;
+    width: 380px;
+    height: 30px;
+    background-color: #0b7c7c;
+    border: 2px;
+    border-radius: 5px;
+    color: white;
+}
+.titulo-raca {
+    margin-left: 10px; 
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: middle;
+    color: white;
+}
+
+h3 {
+    font-size: 18px; 
+    color: #6e6e6e;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+.toggle{
+    margin: 0px 0px 10px 10px;
+}

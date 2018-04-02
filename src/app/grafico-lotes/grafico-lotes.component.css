@@ -1,0 +1,9 @@
+.card-grafico {
+    padding: 0px;
+}
+
+.card-grafico .mat-card-title {
+    padding: 5px 20px;
+    color: rgba(0,0,0,.54);
+    background: rgba(0,0,0,.05);
+}

@@ -1,0 +1,93 @@
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  margin-left: 10px;
+}
+
+.mat-list .mat-list-item, .mat-nav-list .mat-list-item, .mat-selection-list .mat-list-item {
+  font-size: 15px !important;
+}
+
+.mat-form-field.mat-form-field {
+  width: auto;
+}
+
+.upload {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: tomato;
+}
+
+.mat-form-field .mat-form-field-infix {
+  width: auto;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.botao {
+  border-radius: 4px;
+  min-height: 55px;
+  margin-top: 20px;
+  box-shadow: 0px 6px 10px #999999 !important;
+}
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+mat-toolbar {
+  padding: 0;
+}
+
+.example-tooltip-host {
+  display: inline-flex;
+  align-items: center;
+  margin: 50px;
+}
+
+.example-radio-group {
+  display: block;
+  border: 1px solid #555;
+  margin: 20px;
+  padding: 10px;
+}
+
+.menu {
+  position: absolute;
+  top: 45px;
+  z-index: 1;
+}
+
+.item-list:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.item-menu {
+  padding-left: 20px
+}
+
+.mat-list .mat-list-item,
+.mat-nav-list .mat-list-item,
+.mat-selection-list .mat-list-item {
+  color: #828282;
+  cursor: pointer;
+}

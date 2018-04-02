@@ -1,0 +1,10 @@
+.titulo {
+    color: rgb(16,89,130);
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

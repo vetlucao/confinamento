@@ -1,0 +1,10 @@
+<!-- <img class="center" src="assets/images/svg/logo.svg" alt="Sem foto">
+<br> -->
+<div mat-dialog-content>
+  <h1 class="titulo" mat-dialog-title>{{titulo}}</h1>
+  <p>{{texto}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" mat-button (click)="actionDisagree()" *ngIf="disagree.length > 0" [mat-dialog-close]="data.animal">{{disagree.toUpperCase()}}</button>
+  <button mat-raised-button color="primary" mat-button (click)="actionAgree()" [mat-dialog-close]="data.animal">{{agree.toUpperCase()}}</button>
+</div>

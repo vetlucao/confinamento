@@ -1,0 +1,143 @@
+<div id="edicao" class="padding master">
+  <div class="search">
+    <mat-grid-list cols="1">
+      <form style="width: 90% !important;" #form="ngForm" (ngSubmit)="buscarAnimais(form, true)">
+        <input type="text" [(ngModel)]="form.termo" name="termo" class="textbox" placeholder="Buscar Animais (nome, manejo, tag, lote ou categoria)">
+        <button type="submit" title="Buscar Animais" value=home class="button">
+          <mat-icon>search</mat-icon>
+        </button>
+      </form>
+    </mat-grid-list>
+  </div>
+  <br>
+  <br>
+  <br>
+  <mat-progress-bar *ngIf="showProgress" mode="indeterminate"></mat-progress-bar>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let animal of animais">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          TAG: {{animal.$tag}}
+        </mat-panel-title>
+        <mat-panel-description>
+          Manejo: {{animal.$manejo}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input type="text" matInput [(ngModel)]="animal.$nome" placeholder="Nome">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput (focusout)="verificarTag(animal)" placeholder="Tag" type="number" [(ngModel)]="animal.$tag" onKeyPress="if(this.value.length==15) return false;">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Manejo" [(ngModel)]="animal.$manejo">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" onKeyPress="if(this.value.length==15) return false;" placeholder="Sisbov" [(ngModel)]="animal.$sisbov">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select disabled="true" [(ngModel)]="animal.$especie" placeholder="Espécie">
+          <mat-option [value]="especie.$id" *ngFor="let especie of especies">
+            {{especie.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="animal.$curral" placeholder="Curral">
+          <mat-option *ngFor="let curral of currais" [value]="curral.$id" >
+           {{curral.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="animal.$lote.$id" placeholder="Lote">
+          <mat-option *ngFor="let lote of lotes" [value]="lote.$id">
+            {{lote.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="animal.$sexo" placeholder="Sexo">
+          <mat-option value="M">
+            Macho
+          </mat-option>
+          <mat-option value="F">
+            Fêmea
+          </mat-option>
+          <mat-option value="C">
+            Castrado
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" touchUi="true" #picker></mat-datepicker>
+        <input matInput [(ngModel)]="animal.$dataNascimentoDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Data de nascimento">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input [(ngModel)]="animal.$pesoInicial" type="number" matInput placeholder="Peso inicial (kg)">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select [(ngModel)]="animal.$categoria.$id" placeholder="Categoria">
+          <mat-option *ngFor="let categoria of categorias" [value]="categoria.$id">
+            {{categoria.$nome}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="GTA" type="text" [(ngModel)]="animal.$gta">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker disabled="true" touchUi="false" #picker2></mat-datepicker>
+        <input matInput disabled="true" [(ngModel)]="animal.$inicioDeAtividadeDate" [max]="maxDate" [matDatepicker]="picker2" placeholder="Início de atividade">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select (change)="selecionarRacas(animal, form.racas)" placeholder="Raças" [(ngModel)]="form.racas" name="racas" multiple>
+          <mat-option *ngFor="let raca of racas" value="{{raca.id}}">{{raca.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="titulo-composicao-raca">
+        <span class="titulo-raca">Composição de Raça</span>
+      </div>
+
+      <app-raca-composicao *ngFor="let raca of animal.$racas" [raca]="raca"></app-raca-composicao>
+
+      <div *ngIf="showLoading">
+        <h3>{{infoLoading}}</h3>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+
+      <br>
+      <br>
+      <button mat-raised-button (click)="removerAnimal(animal)" color="accent">Remover animal</button>
+      <button mat-raised-button (click)="atualizarAnimal(animal)" color="primary">Atualizar animal</button>
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br>
+
+  <mat-paginator *ngIf="lengthOfAnimais > 0" [length]="lengthOfAnimais" [pageSizeOptions]="[5, 10, 25, 50]" [pageSize]="limit"
+    (page)="pageEvento(form, $event)">
+  </mat-paginator>
+
+
+
+</div>

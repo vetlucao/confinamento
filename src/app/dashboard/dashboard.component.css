@@ -1,0 +1,44 @@
+.col-profundidade {
+    background-color: #fff;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+    height: 60px;
+}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+
+.card-content {
+    padding-top: 5px;
+    padding-left: 7px;
+}
+
+.category {
+    color: rgba(0,0,0,.54);
+    margin: 0px;
+}
+
+.card-content h3 {
+    margin: 0px;
+}
+
+.card-content small {
+    float: left;
+    padding-top: 10px;
+}
+
+.col-lg-1[_ngcontent-c8], .col-lg-10[_ngcontent-c8], .col-lg-11[_ngcontent-c8], .col-lg-12[_ngcontent-c8], .col-lg-2[_ngcontent-c8], .col-lg-3[_ngcontent-c8], .col-lg-4[_ngcontent-c8], .col-lg-5[_ngcontent-c8], .col-lg-6[_ngcontent-c8], .col-lg-7[_ngcontent-c8], .col-lg-8[_ngcontent-c8], .col-lg-9[_ngcontent-c8], .col-md-1[_ngcontent-c8], .col-md-10[_ngcontent-c8], .col-md-11[_ngcontent-c8], .col-md-12[_ngcontent-c8], .col-md-2[_ngcontent-c8], .col-md-3[_ngcontent-c8], .col-md-4[_ngcontent-c8], .col-md-5[_ngcontent-c8], .col-md-6[_ngcontent-c8], .col-md-7[_ngcontent-c8], .col-md-8[_ngcontent-c8], .col-md-9[_ngcontent-c8], .col-sm-1[_ngcontent-c8], .col-sm-10[_ngcontent-c8], .col-sm-11[_ngcontent-c8], .col-sm-12[_ngcontent-c8], .col-sm-2[_ngcontent-c8], .col-sm-3[_ngcontent-c8], .col-sm-4[_ngcontent-c8], .col-sm-5[_ngcontent-c8], .col-sm-6[_ngcontent-c8], .col-sm-7[_ngcontent-c8], .col-sm-8[_ngcontent-c8], .col-sm-9[_ngcontent-c8], .col-xs-1[_ngcontent-c8], .col-xs-10[_ngcontent-c8], .col-xs-11[_ngcontent-c8], .col-xs-12[_ngcontent-c8], .col-xs-2[_ngcontent-c8], .col-xs-3[_ngcontent-c8], .col-xs-4[_ngcontent-c8], .col-xs-5[_ngcontent-c8], .col-xs-6[_ngcontent-c8], .col-xs-7[_ngcontent-c8], .col-xs-8[_ngcontent-c8], .col-xs-9[_ngcontent-c8] {
+    position: relative;
+    min-height: 1px;
+    padding: 0 10px;
+}

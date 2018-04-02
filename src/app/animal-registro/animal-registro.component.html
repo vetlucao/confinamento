@@ -1,0 +1,131 @@
+<form #form="ngForm" (ngSubmit)="submit(form)" class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" matInput placeholder="Nome">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input #tag type="number" [(ngModel)]="form.tag" name="tag" onKeyPress="if(this.value.length==15) return false;" required
+      matInput placeholder="TAG">
+    <mat-hint align="start">
+      <strong>Tag deve possuir 15 dígitos</strong>
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" [(ngModel)]="form.manejo" name="manejo" required matInput placeholder="Manejo">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input #sisbov type="number" [(ngModel)]="form.sisbov" name="sisbov" onKeyPress="if(this.value.length==15) return false;"
+      matInput placeholder="Sisbov">
+    <mat-hint align="start">
+      <strong>Sisbov deve possuir 15 dígitos</strong>
+    </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="form.especie" name="especie" required placeholder="Espécie">
+      <mat-option value="1">
+        Bovino
+      </mat-option>
+      <mat-option value="2">
+        Suíno
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!--   <mat-form-field>
+    <mat-select [(ngModel)]="form.organizacao" name="organizacao" required placeholder="Organização">
+      <mat-option value="1">
+        Grama Senepol
+      </mat-option>
+      <mat-option value="2">
+        Intergado
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="form.fazenda" name="fazenda" required placeholder="Fazenda">
+      <mat-option value="1">
+        Senepol
+      </mat-option>
+      <mat-option value="2">
+        Intergado
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="form.curral" name="curral" placeholder="Curral">
+      <mat-option value="1">
+        Senepol
+      </mat-option>
+      <mat-option value="2">
+        Intergado
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="form.lote" name="lote" placeholder="Lote">
+      <mat-option value="1">
+        Senepol
+      </mat-option>
+      <mat-option value="2">
+        Intergado
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select required [(ngModel)]="form.sexo" name="sexo" placeholder="Sexo">
+      <mat-option value="M">
+        Macho
+      </mat-option>
+      <mat-option value="F">
+        Fêmea
+      </mat-option>
+      <mat-option value="C">
+        Castrado
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="form.dataNascimento" name="dataNascimento" [matDatepicker]="picker" placeholder="Data de nascimento">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi="true" #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input [(ngModel)]="form.pesoInicial" name="pesoInicial" type="number" matInput placeholder="Peso inicial (kg)">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [(ngModel)]="form.categoria" name="categoria" placeholder="Categoria">
+      <mat-option value="1">
+        Bezerro
+      </mat-option>
+      <mat-option value="2">
+        Boi
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input [(ngModel)]="form.gta" name="gta" matInput placeholder="GTA">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="form.inicioAtividade" name="inicioAtividade" required [matDatepicker]="picker2" placeholder="Início de atividade">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker touchUi="true" #picker2></mat-datepicker>
+  </mat-form-field>
+
+  <br>
+  <button type="submit" [disabled]="!form.valid" matTooltip="Clique para registrar o animal" matTooltipPosition="below" mat-raised-button
+    color="primary">
+    <mat-icon>save</mat-icon> Atualizar animal</button>
+
+</form>

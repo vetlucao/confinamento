@@ -1,0 +1,16 @@
+matTooltip {
+  background-color: red;
+}
+
+/* h3 {
+    color: #828282;
+    font-size: 16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  }
+ */
+
+h3 {
+  font-size: 18px;
+  color: #6e6e6e;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
