@@ -7,3 +7,9 @@
     color: rgba(0,0,0,.54);
     background: rgba(0,0,0,.05);
 }
+
+.card-grafico .mat-form-field {
+    float: right;
+    width: 215px;
+    font-size: 14px;
+}

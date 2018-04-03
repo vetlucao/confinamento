@@ -4,7 +4,7 @@
       <div class="col-profundidade">
         <div class="card-content">
           <p class="category">Número de animais</p>
-          <h3 class="title">1800
+          <h3 class="title">{{numeroDeAnimais}}
           </h3>
         </div>
       </div>
@@ -13,7 +13,7 @@
       <div class="col-profundidade">
         <div class="card-content">
           <p class="category">Número de lotes</p>
-          <h3 class="title">22
+          <h3 class="title">{{numeroDeLotes}}
           </h3>
         </div>
       </div>
@@ -22,7 +22,7 @@
       <div class="col-profundidade">
         <div class="card-content">
           <p class="category">Alertas</p>
-          <h3 class="title">3
+          <h3 class="title">{{numeroDeAlertas}}
           </h3>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="card-content">
           <p class="category">Lucro</p>
           <small>R$</small>
-          <h3 class="title">1.875.000,00
+          <h3 class="title">{{lucro.toFixed(2)}}
           </h3>
         </div>
       </div>
@@ -41,7 +41,11 @@
 </div>
 
 <div class="padding">
-  <app-grafico-lotes titulo="Peso, kg" tipo="1"></app-grafico-lotes>
+  <app-grafico-lotes lotePlotlyId="1" titulo="Peso, kg" tipo="1"></app-grafico-lotes>
   <br>
-  <app-grafico-lotes titulo="GPD, kg" tipo="2"></app-grafico-lotes>
+  <app-grafico-lotes  lotePlotlyId="2" titulo="GPD, kg" tipo="2"></app-grafico-lotes>
+  <br>
+  <app-grafico-desempenho></app-grafico-desempenho>
+  <br>
+  <app-grafico-dinamica></app-grafico-dinamica>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import * as _ from 'lodash';
 import * as Plotly from 'plotly.js';
 import { GraficoLotesService } from './grafico-lotes.service';
+import { GraficoLotes } from './grafico-lotes';
 
 @Component({
   selector: 'app-grafico-lotes',
@@ -16,6 +17,7 @@ export class GraficoLotesComponent implements OnInit {
   @ViewChild('chartLotes') graficoLotes: ElementRef;
   @Input() tipo: number;
   @Input() titulo: string;
+  @Input() lotePlotlyId : string;
 
   data: any;
   layout: any;
@@ -28,6 +30,18 @@ export class GraficoLotesComponent implements OnInit {
   l1;
   y2;
   l2;
+  infoMediana;
+  infoMeta;
+
+  dadosGrafico: Array<GraficoLotes> = new Array<GraficoLotes>();
+
+  ordemSelecionada: string;
+
+  ordem = [
+    { value: 'lote', viewValue: 'Lote' },
+    { value: 'peso', viewValue: 'Peso' },
+    { value: 'meta', viewValue: 'Meta' }
+  ];
 
   constructor(private graficoLotesService: GraficoLotesService) { }
 
@@ -42,7 +56,55 @@ export class GraficoLotesComponent implements OnInit {
     this.l1 = this.y1.map((y1i, i) => ` Mediana:<br> ${y1i} ${this.unidade} ± ${this.e1[i]} ${this.unidade} `);
     this.l2 = this.y2.map((y2i, i) => ` Meta: ${y2i} ${this.unidade} `);
 
+    this.armazenarDados();
+
     this.geraGrafico();
+  }
+
+  armazenarDados() {
+    console.info("Armazenar dados");
+    let lenghtOfDados = this.x1.length;
+    this.dadosGrafico.length = 0;
+
+    for (let i = 0; i < lenghtOfDados; i++) {
+
+      let dadoGrafico = new GraficoLotes();
+
+      dadoGrafico.$valor = this.y1[i];
+      dadoGrafico.$meta = this.y2[i];
+      dadoGrafico.$variacao = this.e1[i];
+      dadoGrafico.$lote = this.x1[i];
+      dadoGrafico.$isMeta = this.possuiMeta;
+      dadoGrafico.$unidade = this.unidade;
+
+      this.dadosGrafico.push(dadoGrafico);
+    }
+  }
+
+  ordenarPorValor() {
+    this.dadosGrafico.sort();
+  }
+
+  montarArrays() {
+    console.info("kuririn");
+    let lenghtOfDados = this.dadosGrafico.length;
+    this.y1 = new Array<any>();
+    this.x1 = new Array<any>();
+    this.y2 = new Array<any>();
+    this.e1 = new Array<any>();   
+    
+    this.infoMediana = [];
+    this.infoMeta = [];
+
+    for (let i = 0; i < lenghtOfDados; i++) {
+      let dadoGrafico = this.dadosGrafico[i];
+      this.y1.push(dadoGrafico.$valor);
+      this.x1.push(dadoGrafico.$lote);
+      this.y2.push(dadoGrafico.$meta);
+      this.e1.push(dadoGrafico.$variacao);
+      this.infoMediana.push(dadoGrafico.getHoverInfo()[0]);
+      this.infoMeta.push(dadoGrafico.getHoverInfo()[1]);
+    }
   }
 
   geraGrafico() {
@@ -125,7 +187,7 @@ export class GraficoLotesComponent implements OnInit {
     var gd3 = d3.select(this.graficoLotes.nativeElement);
     var gd = gd3.node();
 
-    Plotly.plot(gd, this.data, this.layout, { displayModeBar: false });
+    Plotly.react(gd, this.data, this.layout, { displayModeBar: false });
 
     var largura = this.graficoLotes.nativeElement.offsetWidth;
     var update = {
@@ -140,21 +202,63 @@ export class GraficoLotesComponent implements OnInit {
     var gd3 = d3.select(this.graficoLotes.nativeElement);
     var gd = gd3.node();
 
-    Plotly.plot(gd, this.data, this.layout, { displayModeBar: false });
+    Plotly.react(gd, this.data, this.layout, { displayModeBar: false });
 
     var largura = this.graficoLotes.nativeElement.offsetWidth;
     var update = {
       width: largura
     };
     Plotly.relayout(gd, update);
-  }
+  } 
 
-  ordenar() {
+  onChangeViwer(valor) {
+    /* alert(this.ordemSelecionada + this.tipo); */
+    if (this.ordemSelecionada == 'peso') {
+
+      this.dadosGrafico.sort(function (a, b) {
+        if (a.$valor > b.$valor) {
+          return 1;
+        }
+        if (a.$valor < b.$valor) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+
+    } else if (this.ordemSelecionada == 'meta') {
+      this.dadosGrafico.sort(function (a, b) {
+        if (a.$meta > b.$meta) {
+          return 1;
+        }
+        if (a.$meta < b.$meta) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+    } else if (this.ordemSelecionada == 'lote') {
+      this.dadosGrafico.sort(function (a, b) {
+        if (a.$lote > b.$lote) {
+          return 1;
+        }
+        if (a.$lote < b.$lote) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+    }
+
+    console.info("montar array");
+    this.montarArrays();  
+
     var update = {
-      y: [[10,20,30], [30,15,20]],
-      'error_y.array': [[20,12,10], undefined],
-      text: [" Mediana:<br> 10 kg ± 20 kg ", " Mediana:<br> 20 kg ± 12 kg ", " Mediana:<br> 30 kg ± 10 kg ", " Meta: 30 kg ", " Meta: 15 kg ", " Meta: 20 kg "]
+      x: [this.x1],
+      y: [this.y1, this.y2],
+      'error_y.array': [this.e1, undefined],
+      text: [this.infoMediana,this.infoMeta]
     };
-    Plotly.restyle('lotePlotly', update)
+    Plotly.restyle(this.lotePlotlyId, update)
   }
 }
